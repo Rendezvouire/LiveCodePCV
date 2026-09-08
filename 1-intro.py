@@ -21,12 +21,12 @@ def filter_color_image(image_path, color):
             for j in range (w):
                 img[i, j, 1] = 0
                 img[i, j, 0] = 0
-    if color == 'green':
+    elif color == 'green':
         for i in range(h):
             for j in range (w):
                 img[i, j, 2] = 0
                 img[i, j, 0] = 0
-    if color == 'blue':
+    elif color == 'blue':
         for i in range(h):
             for j in range (w):
                 img[i, j, 2] = 0
