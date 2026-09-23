@@ -107,16 +107,16 @@ while True:
     gray_video = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     if filter_type == 1:
-        frame = cv2.blur(gray_video, (5, 5))
+        frame = cv2.blur(gray_video, (5, 5)) # cv2.blur(src, (width, height)) / Harus angka positif, semakin besar semakin kuat blurnya
         filter_name = 'Mean Filter'
     elif filter_type == 2:
-        frame = cv2.GaussianBlur(gray_video, (5, 5), 0)
+        frame = cv2.GaussianBlur(gray_video, (5, 5), 0) # cv2.GaussianBlur(src, (width, height), sigmaX) / Harus angka positif dan ganjil, semakin besar semakin kuat blurnya  
         filter_name = 'Gaussian Filter'
     elif filter_type == 3:
-        frame = cv2.medianBlur(gray_video, 5)
+        frame = cv2.medianBlur(gray_video, 5) # cv2.medianBlur(src, ksize) / Harus angka positif, ganjil, dan lebih besar dari 1
         filter_name = 'Median Filter'
     elif filter_type == 4:
-        sobel_x_video = cv2.Sobel(gray_video, cv2.CV_64F, 1, 0, ksize=5)
+        sobel_x_video = cv2.Sobel(gray_video, cv2.CV_64F, 1, 0, ksize=5) # cv2.Sobel(src, ddepth, dx, dy, ksize) / Harus angka positif dan ganjil (standar ksize = 3, kalau -1 namanya jadi Scharr Filter)
         sobel_y_video = cv2.Sobel(gray_video, cv2.CV_64F, 0, 1, ksize=5)
         frame = cv2.magnitude(
             np.float32(np.abs(sobel_x_video)), np.float32(np.abs(sobel_y_video))
@@ -124,7 +124,7 @@ while True:
         frame = cv2.normalize(frame, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
         filter_name = 'Sobel Filter'
     elif filter_type == 5:
-        frame = cv2.Laplacian(gray_video, cv2.CV_64F)
+        frame = cv2.Laplacian(gray_video, cv2.CV_64F) # cv2.Laplacian(src, ddepth)
         frame = cv2.convertScaleAbs(frame)
         filter_name = 'Laplacian Filter'
     elif filter_type == 6:
@@ -133,7 +133,7 @@ while True:
             [-1, 5, -1], 
             [0, -1, 0]
         ])
-        frame = cv2.filter2D(gray_video, -1, kernel_sharpen_video)
+        frame = cv2.filter2D(gray_video, -1, kernel_sharpen_video) # cv2.filter2D(src, ddepth, kernel) / ddepth = -1 untuk mempertahankan tipe data asli
         filter_name = 'Sharpened Image'
     elif filter_type == 7:
         frame = gray_video
